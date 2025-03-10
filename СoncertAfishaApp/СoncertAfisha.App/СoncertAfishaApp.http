@@ -1,0 +1,6 @@
+@СoncertAfishaApp_HostAddress = http://localhost:5288
+
+GET {{СoncertAfishaApp_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
