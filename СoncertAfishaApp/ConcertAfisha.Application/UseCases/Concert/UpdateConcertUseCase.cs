@@ -20,7 +20,7 @@ public class UpdateConcertUseCase
         _mapper = mapper;
     }
     
-    public async Task Execute(Guid id, ConcertsResponseDto request, IFormFile? imageFile)
+    public async Task Execute(Guid id, ConcertRequestDto request, IFormFile? imageFile)
     {
         var existingConcert = await _unitOfWork.Concerts.GetByIdAsync(id);
         if (existingConcert == null)
