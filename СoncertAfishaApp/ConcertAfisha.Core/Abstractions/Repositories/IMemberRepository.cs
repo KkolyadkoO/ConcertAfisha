@@ -2,7 +2,7 @@
 
 namespace ConcertAfisha.Core.Abstractions.Repositories;
 
-public interface IMemberRepository
+public interface IMemberRepository : IRepository<Member>
 {
     Task<List<Member>> GetByConcertIdAsync(Guid concertId);
     Task<List<Member>> GetByUserIdAsync(Guid userId);

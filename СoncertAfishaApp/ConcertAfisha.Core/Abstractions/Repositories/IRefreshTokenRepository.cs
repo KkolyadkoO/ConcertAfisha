@@ -2,7 +2,7 @@
 
 namespace ConcertAfisha.Core.Abstractions.Repositories;
 
-public interface IRefreshTokenRepository
+public interface IRefreshTokenRepository : IRepository<RefreshToken>
 {
     Task<RefreshToken> GetByTokenAsync(string token);
     Task<RefreshToken> GetByUserIdAsync(Guid userId);
