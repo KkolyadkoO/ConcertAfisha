@@ -38,7 +38,7 @@ public class CreateConcertUseCase
             newConcert.ImageUrl = await _imageService.SaveImageToFileSystem(imageFile);
         }
 
-        var id = await _unitOfWork.Concerts.CreateAsync(newConcert);
+        var id = await _unitOfWork.Concerts.AddAsync(newConcert);
         await _unitOfWork.Complete();
         return id;
     }

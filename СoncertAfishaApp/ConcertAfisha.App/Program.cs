@@ -2,6 +2,7 @@ using System.Text;
 using ConcertAfisha.Application.DTOs.Concert;
 using ConcertAfisha.Application.Mapping;
 using ConcertAfisha.Application.UseCases.Concert;
+using ConcertAfisha.Core.Abstractions;
 using ConcertAfisha.Core.Abstractions.Auth;
 using ConcertAfisha.Core.Abstractions.Repositories;
 using ConcertAfisha.DataAccess;

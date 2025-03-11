@@ -10,7 +10,7 @@ public DbSet<Concert> ConcertEntities { get; set; }
 public DbSet<Member> MemberEntities { get; set; }
 public DbSet<User> UserEntities { get; set; }
 public DbSet<RefreshToken> RefreshTokenEntities { get; set; }
-public DbSet<Location> LocationsOfEventEntities { get; set; }
+public DbSet<Location> LocationEntities { get; set; }
 
 
 protected override void OnModelCreating(ModelBuilder modelBuilder)
