@@ -1,10 +1,11 @@
 using ConcertAfisha.Core.Abstractions;
+using ConcertAfisha.Core.Abstractions.Repositories;
 using ConcertAfisha.Core.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace ConcertAfisha.DataAccess.Repositories;
 
-public class ConcertRepository(ConcertAfishaAppDBContext dbContext)
+public class ConcertRepository(ConcertAfishaAppDBContext dbContext) : IConcertRepository
 {
     public async Task<List<Concert>> GetAllAsync()
     {

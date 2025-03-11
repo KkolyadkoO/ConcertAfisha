@@ -1,4 +1,7 @@
 using System.Text;
+using ConcertAfisha.Core.Abstractions.Repositories;
+using ConcertAfisha.DataAccess;
+using ConcertAfisha.DataAccess.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Identity;
@@ -45,7 +48,12 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+// builder.Services.AddAutoMapper(typeof(MappingProfile));
+builder.Services.AddDbContext<ConcertAfishaAppDBContext>(
+    options => { options.UseNpgsql(configuration.GetConnectionString(nameof(ConcertAfishaAppDBContext)));});
 
+
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 
 
