@@ -17,5 +17,16 @@ public class ConcertConfiguration: IEntityTypeConfiguration<Concert>
         builder
             .Property(c => c.Title)
             .IsRequired();
+        
+        builder
+            .HasMany(c => c.Members)
+            .WithOne()
+            .HasForeignKey(f => f.ConcertId)
+            .OnDelete(DeleteBehavior.Cascade);
+        builder
+            .HasOne<Location>()
+            .WithMany()
+            .HasForeignKey(e => e.LocationId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }
