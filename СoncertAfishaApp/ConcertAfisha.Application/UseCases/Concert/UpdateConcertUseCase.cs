@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
+using ConcertAfisha.Application.DTOs.Concert;
 using ConcertAfisha.Application.Exceptions;
 using ConcertAfisha.Core.Abstractions.Repositories;
 using ConcertAfisha.Infrastructure.Abstractions;
 using Microsoft.AspNetCore.Http;
 
-namespace ConcertAfisha.Application.DTOs.Concert;
+namespace ConcertAfisha.Application.UseCases.Concert;
 
 public class UpdateConcertUseCase
 {
@@ -18,8 +19,8 @@ public class UpdateConcertUseCase
         _imageService = imageService;
         _mapper = mapper;
     }
-
-    public async Task Execute(Guid id, ConcertRequestDto request, IFormFile? imageFile)
+    
+    public async Task Execute(Guid id, ConcertsResponseDto request, IFormFile? imageFile)
     {
         var existingConcert = await _unitOfWork.Concerts.GetByIdAsync(id);
         if (existingConcert == null)
@@ -27,7 +28,7 @@ public class UpdateConcertUseCase
             throw new NotFoundException("Concert not found");
         }
 
-        var updatedConcert = _mapper.Map<Core.Models.Concert>(request);
+        var updatedEvent = _mapper.Map<Core.Models.Concert>(request);
 
         if (imageFile != null)
         {
@@ -42,11 +43,11 @@ public class UpdateConcertUseCase
                 throw new InvalidOperationException("The uploaded file is not a valid image.");
             }
 
-            updatedConcert.ImageUrl = await _imageService.UpdateImageToFileSystem(imageFile, existingConcert.ImageUrl);
+            updatedEvent.ImageUrl = await _imageService.UpdateImageToFileSystem(imageFile, existingConcert.ImageUrl);
         }
-        updatedConcert.Id = id;
+        updatedEvent.Id = id;
 
-        await _unitOfWork.Concerts.UpdateAsync(updatedConcert);
+        await _unitOfWork.Concerts.UpdateAsync(updatedEvent);
         await _unitOfWork.Complete();
     }
 }

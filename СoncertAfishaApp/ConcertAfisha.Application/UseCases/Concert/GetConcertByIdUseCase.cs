@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+using ConcertAfisha.Application.DTOs.Concert;
 using ConcertAfisha.Application.Exceptions;
 using ConcertAfisha.Core.Abstractions.Repositories;
+using ConcertAfisha.Core.Specifications;
 
-namespace ConcertAfisha.Application.DTOs.Concert;
+namespace ConcertAfisha.Application.UseCases.Concert;
 
 public class GetConcertByIdUseCase
 {
@@ -17,14 +19,15 @@ public class GetConcertByIdUseCase
 
     public async Task<ConcertsResponseDto> Execute(Guid id)
     {
-        var existingEvent = await _unitOfWork.Concerts.GetByIdAsync(id);
-        if (existingEvent == null)
+        var existing = await _unitOfWork.Concerts
+            .GetByIdAsync(id);
+        if (existing == null)
         {
-            throw new NotFoundException($"Event with id {id} not found");
+            throw new NotFoundException($"Concert with ID {id} not found");
         }
-
-        var response = _mapper.Map<ConcertsResponseDto>(existingEvent);
-        response = response with { NumberOfMembers = existingEvent.Members.Count };
+        
+        var response = _mapper.Map<ConcertsResponseDto>(existing);
+        response = response with{NumberOfMembers = existing.Members.Count};
         return response;
     }
 }
