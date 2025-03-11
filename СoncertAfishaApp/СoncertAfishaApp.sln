@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "СoncertAfisha.App", "СoncertAfisha.App\СoncertAfisha.App.csproj", "{71CD9878-0863-43F8-B7EB-0E0BE320C09D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConcertAfisha.App", "ConcertAfisha.App\ConcertAfisha.App.csproj", "{71CD9878-0863-43F8-B7EB-0E0BE320C09D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConcertAfisha.Core", "ConcertAfisha.Core\ConcertAfisha.Core.csproj", "{64CDF371-BFEF-46F9-8DF3-27EDAF3D8E66}"
 EndProject

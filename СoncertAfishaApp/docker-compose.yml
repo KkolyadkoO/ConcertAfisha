@@ -1,0 +1,16 @@
+﻿
+services:
+
+  database:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: "ConcertAppdb"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "123"
+    
+    ports:
+      - "5438:5432"
+
+volumes:
+  postgres-data:
+

@@ -21,8 +21,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="DTOs\Concert\" />
-      <Folder Include="UseCases\" />
+      <ProjectReference Include="..\ConcertAfisha.Core\ConcertAfisha.Core.csproj" />
+      <ProjectReference Include="..\ConcertAfisha.Infrastructure\ConcertAfisha.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

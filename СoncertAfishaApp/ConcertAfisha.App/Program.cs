@@ -1,7 +1,13 @@
 using System.Text;
+using ConcertAfisha.Application.DTOs.Concert;
+using ConcertAfisha.Application.Mapping;
+using ConcertAfisha.Application.UseCases.Concert;
+using ConcertAfisha.Core.Abstractions.Auth;
 using ConcertAfisha.Core.Abstractions.Repositories;
 using ConcertAfisha.DataAccess;
 using ConcertAfisha.DataAccess.Repositories;
+using ConcertAfisha.Infrastructure;
+using ConcertAfisha.Infrastructure.Abstractions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Identity;
@@ -49,13 +55,22 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 // builder.Services.AddAutoMapper(typeof(MappingProfile));
+
+builder.Services.AddAutoMapper(typeof(MappingConcert));
+
 builder.Services.AddDbContext<ConcertAfishaAppDBContext>(
     options => { options.UseNpgsql(configuration.GetConnectionString(nameof(ConcertAfishaAppDBContext)));});
 
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IImageService, ImageService>();
+builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 
-
+builder.Services.AddScoped<CreateConcertUseCase>();
+builder.Services.AddScoped<GetConcertsByFiltersUseCase>();
+builder.Services.AddScoped<DeleteConcertUseCase>();
+builder.Services.AddScoped<GetConcertByIdUseCase>();
+builder.Services.AddScoped<UpdateConcertUseCase>();
 
 builder.Services.AddAuthorization(options =>
 {
