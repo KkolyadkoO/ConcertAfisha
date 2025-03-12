@@ -4,5 +4,5 @@ namespace ConcertAfisha.Core.Abstractions.Repositories;
 
 public interface ILocationRepository : IRepository<Location>
 {
-    Task<Location> GetByTitle(string title);
+    Task<Location> GetByTitleAsync(string title);
 }

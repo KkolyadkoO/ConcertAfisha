@@ -8,7 +8,7 @@ public class LocationRepository : Repository<Location>, ILocationRepository
 {
     public LocationRepository(ConcertAfishaAppDBContext dbContext) : base(dbContext){}
 
-    public async Task<Location> GetByTitle(string title)
+    public async Task<Location> GetByTitleAsync(string title)
     {
         return await _dbContext.LocationEntities
             .AsNoTracking()

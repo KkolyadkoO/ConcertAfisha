@@ -59,6 +59,7 @@ builder.Services.AddSwaggerGen(c =>
 // builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 builder.Services.AddAutoMapper(typeof(MappingConcert));
+builder.Services.AddAutoMapper(typeof(MappingLocation));
 
 builder.Services.AddDbContext<ConcertAfishaAppDBContext>(
     options => { options.UseNpgsql(configuration.GetConnectionString(nameof(ConcertAfishaAppDBContext)));});
