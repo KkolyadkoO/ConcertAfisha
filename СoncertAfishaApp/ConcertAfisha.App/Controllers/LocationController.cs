@@ -1,10 +1,9 @@
-﻿using ConcertAfisha.Application.DTOs.Concert;
-using ConcertAfisha.Application.DTOs.Location;
+﻿using ConcertAfisha.Application.DTOs.Location;
 using ConcertAfisha.Application.Exceptions;
 using ConcertAfisha.Application.UseCases.Location;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ConcertAfishaApp.EndPoints;
+namespace ConcertAfishaApp.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

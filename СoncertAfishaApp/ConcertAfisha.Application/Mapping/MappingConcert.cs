@@ -13,7 +13,7 @@ public class MappingConcert : Profile
                 Guid.NewGuid(),
                 src.Title,
                 src.Description,
-                src.Date,
+                src.Date.ToUniversalTime(),
                 src.LocationId,
                 src.Category,
                 src.MaxNumberOfMembers,

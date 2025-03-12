@@ -2,9 +2,9 @@
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using ConcertAfisha.Core.Abstractions.Auth;
 using ConcertAfisha.Core.Abstractions.Repositories;
 using ConcertAfisha.Core.Models;
-using ConcertAfisha.Infrastructure.Abstractions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
@@ -21,7 +21,7 @@ public class JwtTokenService : IJwtTokenService
         _unitOfWork = unitOfWork;
     }
     
-    public async Task<(string accessToken, string refreshToken)> GenerateToken(Guid userId, string userName,
+    public async Task<(string accessToken, string refreshToken)> GenerateToken(Guid userId,
         string role)
     {
         var jwtSettings = _configuration.GetSection("Jwt");

@@ -3,6 +3,8 @@ using ConcertAfisha.Application.DTOs.Concert;
 using ConcertAfisha.Application.Mapping;
 using ConcertAfisha.Application.UseCases.Concert;
 using ConcertAfisha.Application.UseCases.Location;
+using ConcertAfisha.Application.UseCases.RefreshToken;
+using ConcertAfisha.Application.UseCases.User;
 using ConcertAfisha.Core.Abstractions;
 using ConcertAfisha.Core.Abstractions.Auth;
 using ConcertAfisha.Core.Abstractions.Repositories;
@@ -16,7 +18,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using IJwtTokenService = ConcertAfisha.Infrastructure.Abstractions.IJwtTokenService;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -61,6 +62,7 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddAutoMapper(typeof(MappingConcert));
 builder.Services.AddAutoMapper(typeof(MappingLocation));
+builder.Services.AddAutoMapper(typeof(MappingUser));
 
 builder.Services.AddDbContext<ConcertAfishaAppDBContext>(
     options => { options.UseNpgsql(configuration.GetConnectionString(nameof(ConcertAfishaAppDBContext)));});
@@ -82,6 +84,15 @@ builder.Services.AddScoped<DeleteLocationUseCase>();
 builder.Services.AddScoped<GetAllLocationUseCase>();
 builder.Services.AddScoped<GetLocationByIdUseCase>();
 builder.Services.AddScoped<UpdateLocationUseCase>();
+
+builder.Services.AddScoped<RefreshRefreshTokenUseCase>();
+builder.Services.AddScoped<GetRefreshTokenUseCase>();
+builder.Services.AddScoped<DeleteRefreshTokenUseCase>();
+
+builder.Services.AddScoped<GetAllUsersUseCase>();
+builder.Services.AddScoped<GetUserByIdUseCase>();
+builder.Services.AddScoped<LoginUserUseCase>();
+builder.Services.AddScoped<RegisterUserUseCase>();
 
 builder.Services.AddAuthorization(options =>
 {

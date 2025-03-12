@@ -3,11 +3,11 @@ using ConcertAfisha.Application.Exceptions;
 using ConcertAfisha.Application.UseCases.Concert;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ConcertAfishaApp.EndPoints;
+namespace ConcertAfishaApp.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ConcertEndPoints : ControllerBase
+public class ConcertController : ControllerBase
 {
     private readonly CreateConcertUseCase _createConcertUseCase;
     private readonly GetConcertsByFiltersUseCase _getConcertsByFiltersUseCase;
@@ -15,7 +15,7 @@ public class ConcertEndPoints : ControllerBase
     private readonly UpdateConcertUseCase _updateConcertUseCase;
     private readonly DeleteConcertUseCase _deleteConcertUseCase;
 
-    public ConcertEndPoints(CreateConcertUseCase createConcertUseCase,
+    public ConcertController(CreateConcertUseCase createConcertUseCase,
         GetConcertsByFiltersUseCase getConcertsByFiltersUseCase, GetConcertByIdUseCase getConcertByIdUseCase,
         UpdateConcertUseCase updateConcertUseCase, DeleteConcertUseCase deleteConcertUseCase)
     {

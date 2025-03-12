@@ -2,13 +2,14 @@ namespace ConcertAfisha.Core.Models;
 
 public class User
 {
-    public User(Guid id, string name, string lastname, string phone, string role)
+    public User(Guid id, string name, string lastname, string phone,string password, string role)
     {
         Id = id;
         Name = name;
         Lastname = lastname;
         Phone = phone;
         Role = role;
+        Password = password;
     }
 
     public User() { }
