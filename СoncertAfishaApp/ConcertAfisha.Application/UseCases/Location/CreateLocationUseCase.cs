@@ -5,12 +5,12 @@ using ConcertAfisha.Core.Abstractions.Repositories;
 
 namespace ConcertAfisha.Application.UseCases.Location;
 
-public class AddLocationUseCase
+public class CreateLocationUseCase
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
 
-    public AddLocationUseCase(IUnitOfWork unitOfWork, IMapper mapper)
+    public CreateLocationUseCase(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;

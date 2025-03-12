@@ -2,6 +2,7 @@ using System.Text;
 using ConcertAfisha.Application.DTOs.Concert;
 using ConcertAfisha.Application.Mapping;
 using ConcertAfisha.Application.UseCases.Concert;
+using ConcertAfisha.Application.UseCases.Location;
 using ConcertAfisha.Core.Abstractions;
 using ConcertAfisha.Core.Abstractions.Auth;
 using ConcertAfisha.Core.Abstractions.Repositories;
@@ -75,6 +76,12 @@ builder.Services.AddScoped<GetConcertsByFiltersUseCase>();
 builder.Services.AddScoped<DeleteConcertUseCase>();
 builder.Services.AddScoped<GetConcertByIdUseCase>();
 builder.Services.AddScoped<UpdateConcertUseCase>();
+
+builder.Services.AddScoped<CreateLocationUseCase>();
+builder.Services.AddScoped<DeleteLocationUseCase>();
+builder.Services.AddScoped<GetAllLocationUseCase>();
+builder.Services.AddScoped<GetLocationByIdUseCase>();
+builder.Services.AddScoped<UpdateLocationUseCase>();
 
 builder.Services.AddAuthorization(options =>
 {

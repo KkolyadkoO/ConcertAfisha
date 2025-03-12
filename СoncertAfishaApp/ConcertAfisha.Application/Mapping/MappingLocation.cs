@@ -6,7 +6,7 @@ namespace ConcertAfisha.Application.Mapping;
 
 public class MappingLocation : Profile
 {
-    protected MappingLocation()
+    public MappingLocation()
     {
         CreateMap<LocationRequestDto, Location>()
             .ForMember(dest => dest.Id,
