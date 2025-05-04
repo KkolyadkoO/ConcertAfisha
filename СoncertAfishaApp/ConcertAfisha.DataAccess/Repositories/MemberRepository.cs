@@ -26,6 +26,14 @@ public class MemberRepository : Repository<Member>, IMemberRepository
             .ToListAsync();
     }
 
+    public async Task<List<Member>> GetByConcertIdAndUserIdAsync(Guid concertId, Guid userId)
+    {
+        return await _dbContext.MemberEntities
+            .AsNoTracking()
+            .Where(m => m.ConcertId == concertId && m.UserId == userId)
+            .ToListAsync();
+    }
+
     public async Task DeleteByConcertIdAndUserIdAsync(Guid concertId, Guid userId)
     {
         var member = await _dbContext.MemberEntities

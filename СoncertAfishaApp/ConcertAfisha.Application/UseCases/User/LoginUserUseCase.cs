@@ -26,11 +26,11 @@ public class LoginUserUseCase
         {
             foundedUser = await _unitOfWork.Users.GetByEmailAsync(request.Email);
         }
-        else if (request.Phone != "")
+        if (request.Phone != "" && foundedUser == null)
         {
             foundedUser = await _unitOfWork.Users.GetByPhoneAsync(request.Phone);
         }
-        else
+        if (foundedUser == null)
         {
             throw new InvalidLoginException("No email or phone provided");
         }

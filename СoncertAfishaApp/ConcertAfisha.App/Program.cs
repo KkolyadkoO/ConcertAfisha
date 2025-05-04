@@ -2,7 +2,9 @@ using System.Text;
 using ConcertAfisha.Application.DTOs.Concert;
 using ConcertAfisha.Application.Mapping;
 using ConcertAfisha.Application.UseCases.Concert;
+using ConcertAfisha.Application.UseCases.Email;
 using ConcertAfisha.Application.UseCases.Location;
+using ConcertAfisha.Application.UseCases.Member;
 using ConcertAfisha.Application.UseCases.RefreshToken;
 using ConcertAfisha.Application.UseCases.User;
 using ConcertAfisha.Core.Abstractions;
@@ -12,6 +14,7 @@ using ConcertAfisha.DataAccess;
 using ConcertAfisha.DataAccess.Repositories;
 using ConcertAfisha.Infrastructure;
 using ConcertAfisha.Infrastructure.Abstractions;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Identity;
@@ -93,7 +96,16 @@ builder.Services.AddScoped<GetAllUsersUseCase>();
 builder.Services.AddScoped<GetUserByIdUseCase>();
 builder.Services.AddScoped<LoginUserUseCase>();
 builder.Services.AddScoped<RegisterUserUseCase>();
+builder.Services.AddScoped<UpdateUserUseCase>();
 
+builder.Services.AddScoped<AddMemberUseCase>();
+builder.Services.AddScoped<DeleteMemberByConcertIdAndUserIdUseCase>();
+builder.Services.AddScoped<DeleteMemberUseCase>();
+builder.Services.AddScoped<GetAllMembersByConcertIdUseCase>();
+builder.Services.AddScoped<GetAllMembersByUserIdUseCase>();
+builder.Services.AddScoped<GetMemberByIdUseCase>();
+
+builder.Services.AddScoped<SendEmailUseCase>();
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("AdminOnly", policy =>
@@ -133,13 +145,13 @@ app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "EventApp 
 
 
 app.UseHttpsRedirection();
-
 app.UseCookiePolicy(new CookiePolicyOptions
 {
-    MinimumSameSitePolicy = SameSiteMode.Strict,
+    MinimumSameSitePolicy = SameSiteMode.None,
     HttpOnly = HttpOnlyPolicy.Always,
     Secure = CookieSecurePolicy.Always
 });
+
 app.UseStaticFiles();
 app.UseAuthentication();
 app.UseAuthorization();

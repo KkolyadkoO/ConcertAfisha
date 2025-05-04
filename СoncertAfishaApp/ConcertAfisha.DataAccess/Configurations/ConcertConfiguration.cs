@@ -10,9 +10,6 @@ public class ConcertConfiguration: IEntityTypeConfiguration<Concert>
     {
         builder.HasKey(a => a.Id);
         
-        builder
-            .HasIndex(c => c.Title)
-            .IsUnique();
 
         builder
             .Property(c => c.Title)

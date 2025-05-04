@@ -17,6 +17,7 @@ public class Concert
         MaxNumberOfMembers = maxNumberOfMembers;
         Price = price;
         ImageUrl = imageUrl;
+        Members = new List<Member>();
     }
 
     public Guid Id { get; set; }
@@ -27,7 +28,7 @@ public class Concert
     public Category Category { get; set; }
     public int MaxNumberOfMembers { get; set; } = 0;
     public decimal Price { get; set; } = 0;
-    public List<Member> Members { get; } = new List<Member>();
+    public List<Member> Members { get; }
     public string? ImageUrl { get; set; }
 
 }

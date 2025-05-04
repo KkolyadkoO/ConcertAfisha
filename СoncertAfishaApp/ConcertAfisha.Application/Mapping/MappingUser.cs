@@ -14,9 +14,17 @@ public class MappingUser : Profile
                 src.Name,
                 src.Lastname,
                 src.Phone,
+                src.UserEmail,
                 src.Password,
                 src.Role
             ));
-        CreateMap<User, UsersResponseDto>();
+        CreateMap<User, UsersResponseDto>()
+            .ConstructUsing(src=> new UsersResponseDto(
+                src.Id,
+                src.Name,
+                src.Lastname,
+                src.UserEmail,
+                src.Phone,
+                src.Role));
     }
 }

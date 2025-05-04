@@ -14,14 +14,17 @@ public class UserController : ControllerBase
     private readonly RegisterUserUseCase _registerUserUseCase;
     private readonly GetAllUsersUseCase _getAllUsersUseCase;
     private readonly DeleteRefreshTokenUseCase _deleteRefreshTokenUseCase;
+    private readonly UpdateUserUseCase _updateUserUseCase;
 
     public UserController(RegisterUserUseCase registerUserUseCase,
         GetAllUsersUseCase getAllUsersUseCase,
-        DeleteRefreshTokenUseCase deleteRefreshTokenUseCase)
+        DeleteRefreshTokenUseCase deleteRefreshTokenUseCase,
+        UpdateUserUseCase updateUserUseCase)
     {
         _registerUserUseCase = registerUserUseCase;
         _getAllUsersUseCase = getAllUsersUseCase;
         _deleteRefreshTokenUseCase = deleteRefreshTokenUseCase;
+        _updateUserUseCase = updateUserUseCase;
     }
     [HttpPost("register")]
     public async Task<IActionResult> RegisterUser([FromBody] UserRegisterRequestDto request)
@@ -66,5 +69,19 @@ public class UserController : ControllerBase
             return NotFound(new { message = e.Message });
         }
         
+    }
+
+    [HttpPut("{id:guid}")]
+    public async Task<IActionResult> UpdateUser(Guid id, [FromBody] UserRegisterRequestDto request)
+    {
+        try
+        {
+            await _updateUserUseCase.Execute(id, request);
+            return Ok();
+        }
+        catch (NotFoundException e)
+        {
+            return BadRequest(new { Message = e.Message });
+        }
     }
 }

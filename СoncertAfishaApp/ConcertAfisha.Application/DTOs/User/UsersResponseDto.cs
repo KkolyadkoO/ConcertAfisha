@@ -4,7 +4,7 @@ public record UsersResponseDto(
     Guid Id,
     string Name,
     string LastName,
-    string Phone,
     string UserEmail,
+    string Phone,
     string Role
 );

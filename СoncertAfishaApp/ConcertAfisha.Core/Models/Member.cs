@@ -14,7 +14,7 @@ public class Member
     public Member() { }
 
     public Guid Id { get; }
-    public DateTime DateOfRegistration { get; set; } = DateTime.Now;
+    public DateTime DateOfRegistration { get; set; } = DateTime.Now.ToUniversalTime();
     public string Email { get; set; }
     public string Phone { get; set; }
     public Guid UserId { get; set; }

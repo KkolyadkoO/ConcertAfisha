@@ -21,8 +21,18 @@ public class MappingConcert : Profile
                 null
             ));
         CreateMap<Concert, ConcertsResponseDto>()
-            .ForMember(dest => dest.NumberOfMembers,
-                opt =>
-                    opt.MapFrom(src => src.MaxNumberOfMembers-src.Members.Count));
+            .ConstructUsing(src => new ConcertsResponseDto(
+                src.Id,
+                src.Title,
+                src.Description,
+                src.Date.ToUniversalTime(),
+                src.LocationId,
+                src.Category,
+                src.MaxNumberOfMembers,
+                src.Members.Count,
+                src.ImageUrl));
+            // .ForMember(dest => dest.NumberOfMembers,
+            //     opt =>
+            //         opt.MapFrom(src => src.Members.Count));
     }
 }
