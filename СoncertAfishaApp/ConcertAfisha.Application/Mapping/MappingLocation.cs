@@ -21,9 +21,12 @@ public class MappingLocation : Profile
             .ForMember(dest => dest.City,
                 opt =>
                     opt.MapFrom(src => src.City))
-            .ForMember(dest => dest.Url,
+            .ForMember(dest => dest.Lat,
                 opt =>
-                    opt.MapFrom(src => src.Url));
+                    opt.MapFrom(src => src.Lat))
+            .ForMember(dest => dest.Lng,
+                opt =>
+                    opt.MapFrom(src => src.Lng));
         CreateMap<Location, LocationResponseDto>();
     }
 }

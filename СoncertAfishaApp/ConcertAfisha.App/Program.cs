@@ -104,6 +104,8 @@ builder.Services.AddScoped<DeleteMemberUseCase>();
 builder.Services.AddScoped<GetAllMembersByConcertIdUseCase>();
 builder.Services.AddScoped<GetAllMembersByUserIdUseCase>();
 builder.Services.AddScoped<GetMemberByIdUseCase>();
+builder.Services.AddScoped<GetAllMembersByConcertIdAndUserIdUseCase>();
+builder.Services.AddScoped<GetAllMembers>();
 
 builder.Services.AddScoped<SendEmailUseCase>();
 builder.Services.AddAuthorization(options =>

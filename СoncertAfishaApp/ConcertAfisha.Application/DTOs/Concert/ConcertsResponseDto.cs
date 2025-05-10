@@ -11,5 +11,6 @@ public record ConcertsResponseDto(
     Category Category = default,
     int MaxNumberOfMembers = 0,
     int NumberOfMembers = 0,
+    decimal Price = 0,
     string? ImageUrl = null
     );

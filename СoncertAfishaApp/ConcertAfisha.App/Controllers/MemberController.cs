@@ -14,10 +14,12 @@ public class MemberController : Controller
     private readonly DeleteMemberByConcertIdAndUserIdUseCase _deleteMemberByConcertIdAndUserIdUseCase;
     private readonly DeleteMemberUseCase _deleteMemberUseCase;
     private readonly GetAllMembersByConcertIdUseCase _getAllMembersByConcertIdUseCase;
+    private readonly GetAllMembersByConcertIdAndUserIdUseCase _getAllMembersByConcertIdAndUserIdUseCase;
     private readonly GetAllMembersByUserIdUseCase _getAllMembersByUserIdUseCase;
     private readonly GetMemberByIdUseCase _getMemberByIdUseCase;
+    private readonly GetAllMembers _getAllMembers;
 
-    public MemberController(AddMemberUseCase addMemberUseCase, DeleteMemberByConcertIdAndUserIdUseCase deleteMemberByConcertIdAndUserIdUseCase, DeleteMemberUseCase deleteMemberUseCase, GetAllMembersByConcertIdUseCase getAllMembersByConcertIdUseCase, GetAllMembersByUserIdUseCase getAllMembersByUserIdUseCase, GetMemberByIdUseCase getMemberByIdUseCase)
+    public MemberController(AddMemberUseCase addMemberUseCase, DeleteMemberByConcertIdAndUserIdUseCase deleteMemberByConcertIdAndUserIdUseCase, DeleteMemberUseCase deleteMemberUseCase, GetAllMembersByConcertIdUseCase getAllMembersByConcertIdUseCase, GetAllMembersByUserIdUseCase getAllMembersByUserIdUseCase, GetMemberByIdUseCase getMemberByIdUseCase, GetAllMembersByConcertIdAndUserIdUseCase getAllMembersByConcertIdAndUserIdUseCase, GetAllMembers getAllMembers)
     {
         _addMemberUseCase = addMemberUseCase;
         _deleteMemberByConcertIdAndUserIdUseCase = deleteMemberByConcertIdAndUserIdUseCase;
@@ -25,6 +27,8 @@ public class MemberController : Controller
         _getAllMembersByConcertIdUseCase = getAllMembersByConcertIdUseCase;
         _getAllMembersByUserIdUseCase = getAllMembersByUserIdUseCase;
         _getMemberByIdUseCase = getMemberByIdUseCase;
+        _getAllMembersByConcertIdAndUserIdUseCase = getAllMembersByConcertIdAndUserIdUseCase;
+        _getAllMembers = getAllMembers;
     }
     
     [HttpGet("{id}")]
@@ -40,11 +44,24 @@ public class MemberController : Controller
             return NotFound(ex.Message);
         }
     }
+    [HttpGet]
+    [Authorize(Policy = "AdminOnly")]
+    public async Task<IActionResult> GetAllUsers()
+    {
+        var response = await _getAllMembers.Execute();
+        return Ok(response);
+    }
     
     [HttpGet("concert/{concertId}")]
     public async Task<IActionResult> GetByConcertId(Guid concertId)
     {
         var members = await _getAllMembersByConcertIdUseCase.Execute(concertId);
+        return Ok(members);
+    }
+    [HttpGet("concert/{concertId}/user/{userId}")]
+    public async Task<IActionResult> GetByConcertIdAndUserId(Guid concertId, Guid userId)
+    {
+        var members = await _getAllMembersByConcertIdAndUserIdUseCase.Execute(concertId, userId);
         return Ok(members);
     }
     
@@ -81,7 +98,7 @@ public class MemberController : Controller
 
     [HttpDelete("concert/{concertId}/user/{userId}")]
     [Authorize]
-    public async Task<IActionResult> DeleteByEventIdAndUserId(Guid concertId, Guid userId)
+    public async Task<IActionResult> DeleteByConcertIdAndUserId(Guid concertId, Guid userId)
     {
         try
         {

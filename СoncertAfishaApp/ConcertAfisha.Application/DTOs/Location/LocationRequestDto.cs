@@ -4,5 +4,6 @@ public record LocationRequestDto(
     string Title,
     string Address,
     string City,
-    string Url
+    double Lat,
+    double Lng
     );

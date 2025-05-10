@@ -5,5 +5,6 @@ public record LocationResponseDto(
     string Title,
     string Address,
     string City,
-    string Url
+    double Lat,
+    double Lng
 );

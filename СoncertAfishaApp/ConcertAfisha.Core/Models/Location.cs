@@ -6,15 +6,17 @@ public class Location
     public string Title { get; set; }
     public string Address { get; set; }
     public string City { get; set; }
-    public string Url { get; set; }
+    public double Lat { get; set; }
+    public double Lng { get; set; }
 
-    public Location(Guid id, string title, string address, string city, string url)
+    public Location(Guid id, string title, string address, string city, double lat, double lng)
     {
         Id = id;
         Title = title;
         Address = address;
         City = city;
-        Url = url;
+        Lat = lat;
+        Lng = lng;
     }
 
     public Location()

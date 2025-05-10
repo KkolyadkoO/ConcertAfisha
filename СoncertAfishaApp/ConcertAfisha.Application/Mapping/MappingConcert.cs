@@ -30,6 +30,7 @@ public class MappingConcert : Profile
                 src.Category,
                 src.MaxNumberOfMembers,
                 src.Members.Count,
+                src.Price,
                 src.ImageUrl));
             // .ForMember(dest => dest.NumberOfMembers,
             //     opt =>
