@@ -24,6 +24,6 @@ public class ConcertConfiguration: IEntityTypeConfiguration<Concert>
             .HasOne<Location>()
             .WithMany()
             .HasForeignKey(e => e.LocationId)
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

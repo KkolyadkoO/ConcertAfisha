@@ -15,16 +15,20 @@ public class UserController : ControllerBase
     private readonly GetAllUsersUseCase _getAllUsersUseCase;
     private readonly DeleteRefreshTokenUseCase _deleteRefreshTokenUseCase;
     private readonly UpdateUserUseCase _updateUserUseCase;
+    private readonly GetUserByIdUseCase _getUserByIdUseCase;
+    private readonly DeleteUserUseCase _deleteUserUseCase;
 
     public UserController(RegisterUserUseCase registerUserUseCase,
         GetAllUsersUseCase getAllUsersUseCase,
         DeleteRefreshTokenUseCase deleteRefreshTokenUseCase,
-        UpdateUserUseCase updateUserUseCase)
+        UpdateUserUseCase updateUserUseCase, GetUserByIdUseCase getUserByIdUseCase, DeleteUserUseCase deleteUserUseCase)
     {
         _registerUserUseCase = registerUserUseCase;
         _getAllUsersUseCase = getAllUsersUseCase;
         _deleteRefreshTokenUseCase = deleteRefreshTokenUseCase;
         _updateUserUseCase = updateUserUseCase;
+        _getUserByIdUseCase = getUserByIdUseCase;
+        _deleteUserUseCase = deleteUserUseCase;
     }
     [HttpPost("register")]
     public async Task<IActionResult> RegisterUser([FromBody] UserRegisterRequestDto request)
@@ -47,6 +51,38 @@ public class UserController : ControllerBase
     {
         var response = await _getAllUsersUseCase.Execute();
         return Ok(response);
+    }
+    
+    [HttpGet("{id:guid}")]
+    [Authorize(Policy = "AdminOnly")]
+    public async Task<IActionResult> GetUserById(Guid id)
+    {
+        try
+        {
+            var response = await _getUserByIdUseCase.Execute(id);
+            return Ok(response);
+        }
+        catch (NotFoundException e)
+        {
+            return NotFound(new { message = e.Message });
+        }
+        
+    }
+    
+    [HttpDelete("{id:guid}")]
+    [Authorize(Policy = "AdminOnly")]
+    public async Task<IActionResult> DeleteUser(Guid id)
+    {
+        try
+        {
+            await _deleteUserUseCase.Execute(id);
+            return Ok();
+        }
+        catch (NotFoundException e)
+        {
+            return NotFound(new { message = e.Message });
+        }
+        
     }
 
     [HttpPost("logout")]

@@ -14,6 +14,6 @@ public class RefreshTokenConfiguration : IEntityTypeConfiguration<RefreshToken>
             .HasOne<User>()
             .WithMany()
             .HasForeignKey(rt => rt.UserId)
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

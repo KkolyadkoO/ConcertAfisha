@@ -97,6 +97,7 @@ builder.Services.AddScoped<GetUserByIdUseCase>();
 builder.Services.AddScoped<LoginUserUseCase>();
 builder.Services.AddScoped<RegisterUserUseCase>();
 builder.Services.AddScoped<UpdateUserUseCase>();
+builder.Services.AddScoped<DeleteUserUseCase>();
 
 builder.Services.AddScoped<AddMemberUseCase>();
 builder.Services.AddScoped<DeleteMemberByConcertIdAndUserIdUseCase>();

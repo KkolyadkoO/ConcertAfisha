@@ -45,6 +45,10 @@ public class UpdateConcertUseCase
 
             updatedEvent.ImageUrl = await _imageService.UpdateImageToFileSystem(imageFile, existingConcert.ImageUrl);
         }
+        else
+        {
+            updatedEvent.ImageUrl = existingConcert.ImageUrl;
+        }
         updatedEvent.Id = id;
 
         await _unitOfWork.Concerts.UpdateAsync(updatedEvent);
