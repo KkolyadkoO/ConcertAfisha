@@ -4,13 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ConcertAfisha.DataAccess.Configurations;
 
-public class ConcertConfiguration: IEntityTypeConfiguration<Concert>
+public class ConcertConfiguration : IEntityTypeConfiguration<Concert>
 {
     public void Configure(EntityTypeBuilder<Concert> builder)
     {
         builder.HasKey(a => a.Id);
-        
-
         builder
             .Property(c => c.Title)
             .IsRequired();
@@ -20,6 +18,7 @@ public class ConcertConfiguration: IEntityTypeConfiguration<Concert>
             .WithOne()
             .HasForeignKey(f => f.ConcertId)
             .OnDelete(DeleteBehavior.Cascade);
+        
         builder
             .HasOne<Location>()
             .WithMany()

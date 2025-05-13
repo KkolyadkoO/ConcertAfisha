@@ -22,9 +22,6 @@ public enum Category
     [Description("Хип-хоп")]
     HipHop,
     
-    [Description("Электронная")]
-    Electronic,
-    
     [Description("Рэп")]
     Rap,
     

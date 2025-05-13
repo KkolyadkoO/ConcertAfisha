@@ -32,8 +32,5 @@ public class MappingConcert : Profile
                 src.Members.Count,
                 src.Price,
                 src.ImageUrl));
-            // .ForMember(dest => dest.NumberOfMembers,
-            //     opt =>
-            //         opt.MapFrom(src => src.Members.Count));
     }
 }
